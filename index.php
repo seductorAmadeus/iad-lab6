@@ -9,12 +9,13 @@
             margin: 0;
         }
 
-        footer {
-
+        footer.footer-text {
+            color: #c0c1d8;
         }
 
-        p {
-            text-align: center;
+        H4 {
+            color: rgba(192, 193, 216, 0.6);
+            text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
         }
 
         /* create two columns of the same width */
@@ -28,7 +29,7 @@
         }
 
         .footer-text {
-            color: #c0c1d8;
+            text-align: center;
         }
 
         .header-bg {
@@ -70,7 +71,8 @@
 <header>
     <div class="header-bg">
         <div class="header-font">
-            <H3>Райла Мартин, гр.P3211, вариант №3010</H3>
+            <H2>Лабораторная работа №6</H2>
+            <H4>Райла Мартин, гр.P3211, вариант №3010</H4>
         </div>
     </div>
 </header>
