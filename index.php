@@ -34,8 +34,8 @@
 
         .header-bg {
             text-align: justify;
-            height: 8em;
-            padding: 2em 3%;
+            height: 6em;
+            padding: 2em 2%;
             background: #3d0913;
         }
 
@@ -51,12 +51,12 @@
             border: 3px solid #4f4f4f;
         }
 
-        #col1 {
+        #columnForm {
             background-color: #4f4f4f;
-            height: 40em;
+            height: 45em;
         }
 
-        #col2 {
+        #columnGraph {
             background-color: #c0c1d8;
         }
 
@@ -79,8 +79,8 @@
 
 <table width="90%" cellpadding="5" cellspacing="0">
     <tr>
-        <td id="col1"></td>
-        <td id="col2">
+        <td id="columnForm"></td>
+        <td id="columnGraph">
             <p><img class="img" src="images/figure.png" alt="Фигура" width="420" height="350"></p>
         </td>
     </tr>
