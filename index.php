@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +85,7 @@ session_start();
             <table width="10em" cellpadding="30" cellspacing="0">
                 <tr>
                     <td bgcolor="#4f4f4f">
-                        <form name="form" action="/action_page.php" onsubmit="return validateForm()" method="post">
+                        <form name="form" action="action_page.php" onsubmit="return validateForm()" method="post">
                             Выберите X: <select name="x">
                                 <option value="-4">-4</option>
                                 <option value="-3">-3</option>
@@ -121,13 +118,8 @@ session_start();
                     <!-- TODO: Добавить условие для проверки валидности ответа в hideAnswer -->
                     <td bgcolor="#f9f9f9">
                         <?php
-                        // begin the session
-        //                        session_start();
-                        // loop through the session array with foreach
-                        foreach($_SESSION['answer'] as $key=>$value)
-                        {
-                            // and print out the values
-                            echo 'The value of $_SESSION['."'".$key."'".'] is '."'".$value."'".' <br />';
+                        if (isset($answer)) {
+                            echo $answer;
                         }
                         ?>
                     </td>

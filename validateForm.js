@@ -1,4 +1,3 @@
-// TODO: присваивать скрытому элементу значение
 function validateForm() {
     var text = "";
     var x = document.forms["form"]["x"].value;

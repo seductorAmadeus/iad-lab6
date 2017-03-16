@@ -1,57 +1,40 @@
 <?php
-// begin the session
-session_start();
-// TODO: добавить проверку значений в диапазоне в поле y
-// TODO: возвращать таблицу значений; (хранить значения в?)
-// TODO: если значение не валидно, то не добавлять его в таблицу
-$answer = "";
-$result = "";
 
 $return_result = $_POST['hideAnswer'];
+
 // TODO: Изменить условия для выхода из скрипта или аналогичные им.
+
 $exit_status = false;
-/*if ($return_result == 2) {
+if ($return_result == 2) {
     $exit_status = true;
-    exit(0);
-}*/
-$server_answers = array();
+    $answer = "";
+    exit;
+} else {
+    if (isInputValid()) {
+        // init some variables
+        $result = "";
+        $line = "";
+        $x = (int)$_POST['x'];
+        $y = (float)$_POST['y'];
+        $radius = (int)$_POST['radius'];
 
-// init some variables
-$return_result = $_POST['hideAnswer'];
-$x = (int)$_POST['x'];
-$y = (float)$_POST['y'];
-$radius = (int)$_POST['radius'];
+        $answer = (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . " " . "Координаты точки: X={$x}; Y={$y}; R={$radius} " . "\n";
 
-// TODO: использовать не массив, а строку (concat), найти способ выводить строку в табличной форме? Использовать разделители?
-// TODO: изменить формат представления данных
-
- //=  (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . "<br></br>" . "Координаты точки: X={$x}; Y={$y}; R={$radius} ";
-
-array_push($server_answers, (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . "<br></br>" . "Координаты точки: X={$x}; Y={$y}; R={$radius} ");
-
-$_SESSION['$answer'] = $server_answers;
-
-/*
- * $char_buff = str_split($word);
-
-foreach ($char_buff as $char){
-    $result .= $answer;
-}
-*/
-
-/*
-if (is_array($answers) || is_object($answers)) {
-    foreach ($answers as $answer) {
-        echo '<tr>';
-        foreach ($answer as $key) {
-            echo '<td>' . $key . '</td>';
+        $file = fopen("answers", "a+");
+        fwrite($file, $answer);
+        fclose($file);
+        $file = fopen("answers", "r");
+        while (($line = fgets($file)) !== false) {
+            $answer .= $line;
         }
-        echo '</tr>';
+    } else {
+        $file = fopen("answers", "r");
+        $answer = "Значения выходят за диапазон или не установлены \n";
+        while (($line = fgets($file)) !== false) {
+            $answer .= $line;
+        }
     }
-    echo '</table>';
 }
-*/
-
 // return answer on page
 include 'index.php';
 
@@ -63,3 +46,16 @@ function pointBelongToArea($x, $y, $radius)
         (($x >= -$radius) && ($x <= 0) && ($y <= $radius / 2.0) && ($y >= 0) && ($y <= $x + $radius / 2.0)));
 }
 
+function isInputValid()
+{
+    if (isset($_POST['x']) && isset($_POST['y']) && isset($_POST['radius'])) {
+        $x = $_POST['x'];
+        $y = $_POST['y'];
+        $r = $_POST['radius'];
+
+        if (is_numeric($x) && is_numeric($y) && is_numeric($r))
+            if ($y >= -5 && $y <= 3)
+                return true;
+    }
+    return false;
+}
