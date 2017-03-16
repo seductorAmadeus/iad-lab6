@@ -1,38 +1,31 @@
 <?php
 
-$return_result = $_POST['hideAnswer'];
+$answer_ready = false;
 
-// TODO: Изменить условия для выхода из скрипта или аналогичные им.
+if (isInputValid()) {
+    // init some variables
+    $result = "";
+    $answer_ready = true;
+    $line = "";
+    $x = (int)$_POST['x'];
+    $y = (float)$_POST['y'];
+    $radius = (int)$_POST['radius'];
 
-$exit_status = false;
-if ($return_result == 2) {
-    $exit_status = true;
+    $answer = (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . " ; " .  "координаты точки: X={$x}; Y={$y}; R={$radius} " . "<br></br>";
+
+    $file = fopen("answers", "a+");
+    fwrite($file, $answer);
+    fclose($file);
+    $file = fopen("answers", "r");
     $answer = "";
-    exit;
+    while (($line = fgets($file)) !== false) {
+        $answer .= $line;
+    }
 } else {
-    if (isInputValid()) {
-        // init some variables
-        $result = "";
-        $line = "";
-        $x = (int)$_POST['x'];
-        $y = (float)$_POST['y'];
-        $radius = (int)$_POST['radius'];
-
-        $answer = (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . " " . "Координаты точки: X={$x}; Y={$y}; R={$radius} " . "\n";
-
-        $file = fopen("answers", "a+");
-        fwrite($file, $answer);
-        fclose($file);
-        $file = fopen("answers", "r");
-        while (($line = fgets($file)) !== false) {
-            $answer .= $line;
-        }
-    } else {
-        $file = fopen("answers", "r");
-        $answer = "Значения выходят за диапазон или не установлены \n";
-        while (($line = fgets($file)) !== false) {
-            $answer .= $line;
-        }
+    $file = fopen("answers", "r");
+    $answer = "Значения выходят за диапазон или не установлены" . "<br></br>";
+    while (($line = fgets($file)) !== false) {
+        $answer .= $line;
     }
 }
 // return answer on page

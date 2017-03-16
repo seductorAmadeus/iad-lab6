@@ -26,6 +26,7 @@
 
         td, th {
             width: 100%;
+            color: #c0c1d8;
         }
 
         .footer-text {
@@ -98,7 +99,7 @@
                                 <option value="4">4</option>
                             </select>
                             <br><br>
-                            Введите Y: <input type="text" name="y" value="0">
+                            Введите Y: <input type="text" name="y">
                             <br><br>
                             Выберите R: <select name="radius">
                                 <option value="1">1</option>
@@ -110,13 +111,11 @@
                             <br><br>
                             <button type="submit" onclick="validateForm()">Проверить</button>
                             <p id="answerValid"></p>
-                            <input id="hiddenAnswerValid" type="hidden" name="hideAnswer" value="2">
                         </form>
                     </td>
                 </tr>
                 <tr>
-                    <!-- TODO: Добавить условие для проверки валидности ответа в hideAnswer -->
-                    <td bgcolor="#f9f9f9">
+                    <td bgcolor="#4f4f4f">
                         <?php
                         if (isset($answer)) {
                             echo $answer;

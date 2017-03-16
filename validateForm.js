@@ -6,11 +6,9 @@ function validateForm() {
     if (!(isNumeric(x) && isNumeric(y) && isNumeric(radius))) {
         text = "Input not valid! ";
         document.getElementById("answerValid").innerHTML = text;
-        document.getElementById('hiddenAnswerValid').value = false;
         return false;
     }
     document.getElementById("answerValid").innerHTML = text;
-    document.getElementById('hiddenAnswerValid').value = true;
     return true;
 };
 
