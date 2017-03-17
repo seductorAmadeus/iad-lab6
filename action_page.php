@@ -3,6 +3,7 @@
 $answer_ready = false;
 
 if (isInputValid()) {
+    $begin = microtime();
     // init some variables
     $result = "";
     $answer_ready = true;
@@ -11,7 +12,7 @@ if (isInputValid()) {
     $y = (float)$_POST['y'];
     $radius = (int)$_POST['radius'];
 
-    $answer = (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . " ; " .  "координаты точки: X={$x}; Y={$y}; R={$radius} " . "<br></br>";
+    $answer = (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . " ; " . "координаты точки: X={$x}; Y={$y}; R={$radius} " . "<br></br>";
 
     $file = fopen("answers", "a+");
     fwrite($file, $answer);
@@ -21,6 +22,10 @@ if (isInputValid()) {
     while (($line = fgets($file)) !== false) {
         $answer .= $line;
     }
+    $end = microtime();
+
+    $time = ($end - $begin) * 100000;
+
 } else {
     $file = fopen("answers", "r");
     $answer = "Значения выходят за диапазон или не установлены" . "<br></br>";
@@ -28,6 +33,13 @@ if (isInputValid()) {
         $answer .= $line;
     }
 }
+
+if ($time) {
+    echo "<p> Время работы скрипта: " . round($time, 2) . " микросекунд</p>";
+}
+
+echo "<p>Текущее время: " . date("G:i:s") . "</p>";
+
 // return answer on page
 include 'index.php';
 
