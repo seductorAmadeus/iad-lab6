@@ -1,8 +1,6 @@
 function validateForm() {
     var text = "";
-    var x = document.forms["form"]["x"].value;
     var y = document.forms["form"]["y"].value;
-    var radius = document.forms["form"]["radius"].value;
     if (!isNan(y)) {
         text = "Input not valid! ";
         document.getElementById("answerValid").innerHTML = text;
@@ -11,7 +9,3 @@ function validateForm() {
     document.getElementById("answerValid").innerHTML = text;
     return true;
 };
-
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
