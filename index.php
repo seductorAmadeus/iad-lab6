@@ -30,7 +30,6 @@
 
         table tr td:nth-child(3) {
             width: 15%;
-            word-wrap: break-word;
             padding-right: 5%;
         }
 
@@ -72,6 +71,7 @@
         }
     </style>
     <script type="text/javascript" src="validateForm.js"></script>
+
 </head>
 
 <body>
@@ -84,60 +84,55 @@
         </div>
     </div>
 </header>
-
 <table width="100%" cellpadding="5" cellspacing="0">
     <tr>
         <td width="50%" id="columnForm">
-            <table border="1" width="10em" cellpadding="10" cellspacing="0">
-                <tr>
-                    <td bgcolor="#4f4f4f" colspan="4">
-                        <form name="form" action="action_page.php" onsubmit="return validateForm()" method="post">
-                            Выберите X: <select name="x">
-                                <option value="-4">-4</option>
-                                <option value="-3">-3</option>
-                                <option value="-2">-2</option>
-                                <option value="-1">-1</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                            <br><br>
-                            Введите Y: <input type="text" name="y">
-                            <br><br>
-                            Выберите R: <select name="radius">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <br><br>
-                            <button type="submit" onclick="validateForm()">Проверить</button>
-                            <p id="answerValid"></p>
-                        </form>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Попал?</th>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th>R</th>
-                </tr>
-                <?php
-                if (isset($answer)) {
-                    echo $answer;
-                }
-                ?>
-            </table>
+            <div STYLE=" height: 100%; width: 780px; font-size: 12px; overflow: auto;">
+                <table border="1" width="10em" cellpadding="10" cellspacing="0">
+                    <tr>
+                        <td bgcolor="#4f4f4f" colspan="4">
+                            <form name="form" action="action_page.php" onsubmit="return validateForm()" method="post">
+                                Выберите X: <select name="x">
+                                    <option value="-4">-4</option>
+                                    <option value="-3">-3</option>
+                                    <option value="-2">-2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                                <br><br>
+                                Введите Y: <input type="text" name="y">
+                                <br><br>
+                                Выберите R: <select name="radius">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <br><br>
+                                <button type="submit" onclick="validateForm()">Проверить</button>
+                                <p id="answerValid"></p>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php
+                    if (isset($answer)) {
+                        echo $answer;
+                    }
+                    ?>
+                </table>
+            </div>
         </td>
         <td width="50%" id="columnGraph">
             <p><img class="img" src="images/figure.png" alt="Фигура" width="420" height="350"></p>
         </td>
     </tr>
 </table>
+
 <footer class="footer-text">
     <p>Posted by: seductorAmadeus</p>
     <p>Contact information:

@@ -14,7 +14,7 @@ if (isInputValid()) {
 
     // complete answer
     $answer = (pointBelongToArea($x, floatval($y), $radius) ? "<tr>  " . "\n" . "<td>" . "Точка принадлежит области" . "</td>" : "<tr>" . "\n" . "<td>" . "Точка не принадлежит области" . "</td>") . "\n" .
-        "<td> X={$x} </td>" . "\n" . "<td>" ."Y={$y} </td>" . "\n" . "<td> R={$radius} </td>" . "\n" . "</tr>" . "\n";
+        "<td> X={$x} </td>" . "\n" . "<td>" . "Y={$y} </td>" . "\n" . "<td> R={$radius} </td>" . "\n" . "</tr>" . "\n";
 
     // open file and write answers
     $file = fopen("answers", "a+");
@@ -22,7 +22,11 @@ if (isInputValid()) {
     fclose($file);
     $file = fopen("answers", "r");
     $answer = "";
+
+    $answer = "<tr>" . "\n" . "<th>" . "Попал?" . "</th>" . "<th>" . "X" . "</th>" . " <th>" . "Y" . "</th>" . "<th>" . "R" . "</th>" . "</tr>";
+
     while (($line = fgets($file)) !== false) {
+
         $answer .= $line;
     }
     // end time measuring
@@ -31,7 +35,8 @@ if (isInputValid()) {
 } else {
     $begin = microtime();
     $file = fopen("answers", "r");
-    $answer = "Значения выходят за диапазон или не установлены" . "<br></br>";
+    $answer = "Значения выходят за диапазон или не установлены" . "<br></br>" . "<tr>" . "\n" . "<th>" . "Попал?" . "</th>" . "<th>" . "X" . "</th>" . " <th>" . "Y" . "</th>" . "<th>" . "R" . "</th>" . "</tr>";
+
     while (($line = fgets($file)) !== false) {
         $answer .= $line;
     }
