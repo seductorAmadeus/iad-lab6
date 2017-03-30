@@ -1,19 +1,22 @@
 <?php
 
-$answer_ready = false;
-
 if (isInputValid()) {
+
+    // start measuring script time
     $begin = microtime();
+
     // init some variables
     $result = "";
-    $answer_ready = true;
     $line = "";
     $x = (int)$_POST['x'];
-    $y = (float)$_POST['y'];
+    $y = (string)$_POST['y'];
     $radius = (int)$_POST['radius'];
 
-    $answer = (pointBelongToArea($x, $y, $radius) ? "Точка принадлежит области" : "Точка не принадлежит области") . " ; " . "координаты точки: X={$x}; Y={$y}; R={$radius} " . "<br></br>";
+    // complete answer
+    $answer = (pointBelongToArea($x, floatval($y), $radius) ? "<tr>  " . "\n" . "<td>" . "Точка принадлежит области" . "</td>" : "<tr>" . "\n" . "<td>" . "Точка не принадлежит области" . "</td>") . "\n" .
+        "<td> X={$x} </td>" . "\n" . "<td>" ."Y={$y} </td>" . "\n" . "<td> R={$radius} </td>" . "\n" . "</tr>" . "\n";
 
+    // open file and write answers
     $file = fopen("answers", "a+");
     fwrite($file, $answer);
     fclose($file);
@@ -22,19 +25,22 @@ if (isInputValid()) {
     while (($line = fgets($file)) !== false) {
         $answer .= $line;
     }
+    // end time measuring
     $end = microtime();
 
-    $time = ($end - $begin) * 100000;
-
 } else {
+    $begin = microtime();
     $file = fopen("answers", "r");
     $answer = "Значения выходят за диапазон или не установлены" . "<br></br>";
     while (($line = fgets($file)) !== false) {
         $answer .= $line;
     }
+    $end = microtime();
 }
 
-if ($time) {
+$time = ($end - $begin) * 100000;
+
+if (isset($time)) {
     echo "<p> Время работы скрипта: " . round($time, 2) . " микросекунд</p>";
 }
 
@@ -58,9 +64,11 @@ function isInputValid()
         $y = $_POST['y'];
         $r = $_POST['radius'];
 
-        if (is_numeric($x) && is_numeric($y) && is_numeric($r))
-            if ($y >= -5 && $y <= 3)
+        if (is_numeric($x) && is_numeric($y) && is_numeric($r)) {
+            if ($y >= -5 && $y <= 3) {
                 return true;
+            }
+        }
     }
     return false;
 }

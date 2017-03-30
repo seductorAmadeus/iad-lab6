@@ -8,6 +8,7 @@
             background-size: cover;
             background-color: #300016;
             margin: 0;
+            color: rgba(192, 193, 216, 0.6);
         }
 
         footer.footer-text {
@@ -19,15 +20,18 @@
             text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
         }
 
-        /* create two columns of the same width */
-        table {
-            table-layout: fixed;
-            width: 100%;
+        form {
+            margin: 0;
         }
 
         td, th {
-            width: 100%;
             color: #c0c1d8;
+        }
+
+        table tr td:nth-child(3) {
+            width: 15%;
+            word-wrap: break-word;
+            padding-right: 5%;
         }
 
         .footer-text {
@@ -81,12 +85,12 @@
     </div>
 </header>
 
-<table width="90%" cellpadding="5" cellspacing="0">
+<table width="100%" cellpadding="5" cellspacing="0">
     <tr>
-        <td id="columnForm">
-            <table width="10em" cellpadding="30" cellspacing="0">
+        <td width="50%" id="columnForm">
+            <table border="1" width="10em" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td bgcolor="#4f4f4f">
+                    <td bgcolor="#4f4f4f" colspan="4">
                         <form name="form" action="action_page.php" onsubmit="return validateForm()" method="post">
                             Выберите X: <select name="x">
                                 <option value="-4">-4</option>
@@ -115,23 +119,25 @@
                         </form>
                     </td>
                 </tr>
+
                 <tr>
-                    <td bgcolor="#4f4f4f">
-                        <?php
-                        if (isset($answer)) {
-                            echo $answer;
-                        }
-                        ?>
-                    </td>
+                    <th>Попал?</th>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
                 </tr>
+                <?php
+                if (isset($answer)) {
+                    echo $answer;
+                }
+                ?>
             </table>
         </td>
-        <td id="columnGraph">
+        <td width="50%" id="columnGraph">
             <p><img class="img" src="images/figure.png" alt="Фигура" width="420" height="350"></p>
         </td>
     </tr>
 </table>
-
 <footer class="footer-text">
     <p>Posted by: seductorAmadeus</p>
     <p>Contact information:
